@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Estudo 42: Como orar a Jeová de coração?</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans:wght@400;700&family=Noto+Serif:ital,wght@0,400;0,700;1,400&display=swap" rel="stylesheet">
+    <script src="https://unpkg.com/lucide@latest"></script>
+    <style>
+        body {
+            font-family: 'Noto Sans', sans-serif;
+            background-color: #f5f5f7;
+            color: #1a1a1a;
+            line-height: 1.6;
+        }
+        .serif-text {
+            font-family: 'Noto Serif', serif;
+        }
+        .paragraph-text {
+            font-family: 'Noto Serif', serif;
+            font-size: 1.125rem; /* 18px */
+            color: #333;
+            text-align: justify;
+        }
+        .jw-purple {
+            background-color: #4a237e;
+        }
+        .card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .sticky-header {
+            position: sticky;
+            top: 0;
+            z-index: 50;
+            background-color: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(5px);
+            border-bottom: 1px solid #e5e7eb;
+        }
+        .question-text {
+            font-weight: 700;
+            color: #4a237e;
+            margin-bottom: 0.5rem;
+        }
+        .scripture-link {
+            color: #2563eb;
+            font-weight: bold;
+            cursor: pointer;
+            text-decoration: underline;
+        }
+        .caption-box {
+            background-color: #f3f4f6;
+            border-left: 4px solid #4a237e;
+            padding: 1rem;
+            margin-top: 1rem;
+            font-size: 0.95rem;
+            color: #4b5563;
+        }
+        /* RESPOSTA A (Amarelo) */
+        .answer-highlight {
+            background-color: #fff59d;
+            font-style: italic;
+            border-radius: 2px;
+            padding: 0 2px;
+            transition: all 0.3s ease;
+        }
+        /* RESPOSTA B (Verde Claro) */
+        .answer-highlight-b {
+            background-color: #b9f6ca; /* Verde menta claro */
+            font-style: italic;
+            border-radius: 2px;
+            padding: 0 2px;
+            transition: all 0.3s ease;
+        }
+        
+        /* Esconder destaques */
+        .hide-highlights .answer-highlight,
+        .hide-highlights .answer-highlight-b {
+            background-color: transparent;
+            font-style: normal;
+        }
+
+        .para-num {
+            float: left;
+            font-weight: bold;
+            color: #666;
+            margin-right: 0.5rem;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 0.9rem;
+            margin-top: 0.2rem;
+        }
+        .notes-container {
+            margin-top: 1.5rem;
+            border-top: 1px solid #e2e8f0;
+            padding-top: 1rem;
+        }
+        .notes-label {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 0.75rem;
+            font-weight: bold;
+            text-transform: uppercase;
+            color: #64748b;
+            margin-bottom: 0.5rem;
+        }
+        .notes-box {
+            width: 100%;
+            min-height: 60px;
+            padding: 0.75rem;
+            background-color: #f8fafc;
+            border: 1px dashed #cbd5e1;
+            border-radius: 0.375rem;
+            font-family: 'Noto Sans', sans-serif;
+            font-size: 0.95rem;
+            color: #334155;
+            line-height: 1.5;
+            outline: none;
+            transition: all 0.2s;
+        }
+        .notes-box:focus {
+            background-color: #ffffff;
+            border-color: #4a237e;
+            box-shadow: 0 0 0 3px rgba(74, 35, 126, 0.1);
+        }
+        .notes-box:empty:before {
+            content: "Digite suas perguntas extras ou notas aqui...";
+            color: #94a3b8;
+            font-style: italic;
+        }
+        /* Estilo do Badge de Tempo */
+        .time-badge {
+            background-color: #eef2ff;
+            color: #4338ca;
+            font-family: monospace;
+            font-weight: bold;
+            font-size: 0.85rem;
+            padding: 4px 8px;
+            border-radius: 4px;
+            border: 1px solid #c7d2fe;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            margin-bottom: 10px;
+        }
+        /* Estilo para Leitura Bíblica */
+        .bible-read-box {
+            background-color: #eff6ff; /* Azul bem claro */
+            border-left: 4px solid #2563eb;
+            padding: 1.25rem;
+            margin-top: 1.5rem;
+            border-radius: 0 8px 8px 0;
+            box-shadow: 0 1px 2px rgba(0,0,0,0.05);
+        }
+        .bible-ref-title {
+            color: #1e40af;
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            margin-bottom: 0.75rem;
+            font-size: 0.95rem;
+            text-transform: uppercase;
+        }
+        .bible-content {
+            font-family: 'Noto Serif', serif;
+            color: #1e293b;
+            font-size: 1.1rem;
+            line-height: 1.7;
+        }
+        .verse-num {
+            font-size: 0.8em;
+            font-weight: bold;
+            color: #64748b;
+            vertical-align: super;
+            margin-right: 2px;
+        }
+        /* NOVOS ESTILOS PARA OS SUBTÓPICOS CHAMATIVOS */
+        .section-header {
+            background: linear-gradient(135deg, #6b21a8 0%, #4a237e 100%);
+            color: white;
+            padding: 1rem 1.5rem;
+            border-radius: 12px;
+            margin-top: 2.5rem;
+            margin-bottom: 1.5rem;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-weight: 800;
+            text-transform: uppercase;
+            font-size: 1.1rem;
+            box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+            letter-spacing: 0.05em;
+            position: relative;
+            overflow: hidden;
+        }
+        /* Efeito de brilho suave no fundo */
+        .section-header::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: linear-gradient(to right, rgba(255,255,255,0) 0%, rgba(255,255,255,0.1) 50%, rgba(255,255,255,0) 100%);
+            transform: skewX(-20deg) translateX(-150%);
+            animation: shimmer 3s infinite;
+        } 
+        /* Para telas muito pequenas, diminuir um pouco */
+        @media (max-width: 640px) {
+            .section-header {
+                font-size: 1rem;
+                padding: 0.75rem 1rem;
+            }
+        }
+    </style>
+</head>
+<body class="pb-24">
+
+    <!-- Header Fixo -->
+    <header class="sticky-header px-4 py-3 shadow-sm" id="mainHeader">
+        <div class="max-w-5xl mx-auto flex flex-col md:flex-row justify-between items-center gap-3">
+            
+            <div class="flex items-center gap-4 w-full md:w-auto justify-between">
+                <div class="flex items-center gap-3">
+                    <div class="bg-purple-700 text-white font-bold rounded-lg w-10 h-10 flex items-center justify-center text-lg">42</div>
+                    <div>
+                        <h1 class="text-sm font-bold text-gray-500 uppercase tracking-wide">A Sentinela</h1>
+                        <p class="text-xs text-gray-400">Estudo 42</p>
+                    </div>
+                </div>
+                <!-- Menu Toggle Mobile -->
+                <button onclick="toggleMenu()" class="p-2 hover:bg-gray-100 rounded-full lg:hidden">
+                    <i data-lucide="menu" class="w-6 h-6 text-gray-600"></i>
+                </button>
+            </div>
+
+            <!-- Controles de Tempo -->
+            <div class="flex items-center gap-4 bg-gray-50 px-3 py-2 rounded-lg border border-gray-200">
+                <div class="flex flex-col">
+                    <label for="startTime" class="text-[10px] uppercase font-bold text-gray-500">Início Real</label>
+                    <input type="time" id="startTime" value="17:40" onchange="recalculateTimes()" class="bg-transparent font-mono font-bold text-gray-800 focus:outline-none cursor-pointer">
+                </div>
+                <div class="h-8 w-px bg-gray-300"></div>
+                <div class="text-right">
+                    <div class="text-[10px] uppercase font-bold text-gray-500">Meta Fim</div>
+                    <div class="font-mono font-bold text-red-600">18:40</div>
+                </div>
+                <div class="h-8 w-px bg-gray-300"></div>
+                <div class="text-right">
+                    <div id="clock" class="text-xl font-bold font-mono text-gray-800 leading-none">00:00</div>
+                </div>
+            </div>
+
+        </div>
+        
+        <!-- Controles Extras -->
+        <div id="viewControls" class="max-w-5xl mx-auto mt-2 pt-2 border-t border-gray-100 hidden lg:flex gap-4 text-sm justify-end">
+             <button onclick="toggleHighlights()" class="text-purple-700 font-bold hover:bg-purple-50 px-3 py-1 rounded transition flex items-center gap-2">
+                <i data-lucide="highlighter" class="w-4 h-4"></i>
+                Alternar Respostas
+             </button>
+        </div>
+    </header>
+
+    <main class="max-w-4xl mx-auto p-4 space-y-6">
+
+        <!-- Cabeçalho do Artigo -->
+        <section class="text-center py-8 bg-white rounded-lg shadow-sm border border-gray-200">
+            <p class="text-sm font-bold text-gray-500 uppercase mb-2">Cântico 44: Oração de um servo aflito</p>
+            <h2 class="text-3xl md:text-5xl font-bold text-gray-900 serif-text mb-6">Como orar a Jeová de coração?</h2>
+            
+            <div class="max-w-2xl mx-auto px-6">
+                <p class="text-xl text-gray-700 italic serif-text mb-6">
+                    “Clamo de todo o coração. Responde-me, ó Jeová.” — <span class="font-bold not-italic text-sm text-gray-500">SAL. 119:145</span>
+                </p>
+                <div class="bg-yellow-50 border-l-4 border-yellow-500 p-4 text-left rounded-r-lg">
+                    <h3 class="font-bold text-yellow-800 uppercase text-sm mb-1">Objetivo</h3>
+                    <p class="text-gray-800 font-medium">Ver como as orações registradas na Bíblia podem nos ajudar a conseguir orar de coração.</p>
+                </div>
+            </div>
+        </section>
+
+        <!-- ================= INTRODUÇÃO ================= -->
+        <div class="section-header">
+            <i data-lucide="play-circle" class="w-6 h-6"></i> Introdução
+        </div>
+
+        <!-- §1-2 -->
+        <article class="card p-6 border-l-4 border-gray-400" data-duration="3" data-section="intro">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">1-2. (a) Por que pode ser difícil abrir nosso coração para Jeová? (b) Como sabemos que Jeová presta atenção às nossas orações?</p>
+            </div>
+            
+            <div class="paragraph-text">
+                <span class="para-num">1</span> VOCÊ acha que suas orações são repetitivas? Sente que é difícil abrir seu coração para Jeová? Isso pode acontecer com todos nós. <span class="answer-highlight">Por causa da correria do dia a dia, talvez tenhamos a tendência de orar com pressa. Ou pode ser que achemos que não merecemos o privilégio da oração e por isso não conseguimos falar para Jeová sobre os nossos sentimentos e pensamentos mais profundos.</span>
+            </div>
+            <div class="paragraph-text mt-4">
+                <span class="para-num">2</span> A Bíblia nos garante que o importante para Jeová não é usarmos palavras bonitas em nossas orações, mas sim falarmos com ele de coração. <span class="answer-highlight-b">Ele ouve “o pedido dos mansos”. (Sal. 10:17) Jeová presta atenção a cada palavra que dizemos porque somos importantes para ele. — Sal. 139:1-3.</span>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>O que Jeová valoriza:</strong> Coração sincero, NÃO palavras bonitas<br>
+                    <strong>Por que ele ouve:</strong> Porque somos importantes para ele
+                </div>
+            </div>
+        </article>
+
+        <!-- §3 -->
+        <article class="card p-6 border-l-4 border-blue-400" data-duration="3">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">3. O que vamos ver neste estudo?</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">3</span> Neste estudo, vamos ver as respostas das seguintes perguntas: <span class="answer-highlight">Por que podemos orar a Jeová sem medo? Como podemos fazer orações de coração? Como as orações registradas na Bíblia podem nos ajudar a fazer isso? E o que podemos fazer se estamos tão angustiados que não conseguimos expressar nossos sentimentos para Jeová?</span>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    A primeira pergunta: <strong>"Por que podemos orar sem medo?"</strong> será agora respondida no próximo subtítulo que tem o tema <strong>"Ore a Jeová sem medo"</strong>. Vamos ao Parágrafo 4.
+                </div>
+            </div>
+        </article>
+
+        <!-- ================= ORE A JEOVÁ SEM MEDO ================= -->
+        <div class="section-header">
+            <i data-lucide="heart" class="w-6 h-6"></i> Ore a Jeová sem medo
+        </div>
+
+        <!-- §4 -->
+        <article class="card p-6 border-l-4 border-gray-400" data-duration="4">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">4. O que pode nos ajudar a orar a Jeová sem medo? (Salmo 119:145)</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">4</span> <span class="answer-highlight">Quando entendemos que Jeová é um amigo leal que quer o nosso bem, conseguimos orar sem medo. Nós ficamos à vontade para contar a ele o que pensamos e sentimos.</span> O escritor do Salmo 119 procurava ver Jeová dessa maneira. A vida dele não era perfeita. Homens maus inventavam mentiras sobre ele. (Sal. 119:23, 69, 78) Além disso, esse salmista às vezes se sentia desanimado por causa de seus erros. (Sal. 119:5) <span class="answer-highlight">Mesmo assim, ele não tinha medo de abrir o coração para Jeová.</span> — <span class="scripture-link">Leia Salmo 119:145</span>.
+            </div>
+
+            <!-- LEITURA BÍBLICA: SALMO 119:145 -->
+            <div class="bible-read-box">
+                <div class="bible-ref-title"><i data-lucide="book-open" class="w-4 h-4"></i> Salmo 119:145</div>
+                <div class="bible-content">
+                    <span class="verse-num">145</span> Clamo de todo o coração. Responde-me, ó Jeová.<br>
+                    Vou cumprir os teus decretos.
+                </div>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>Pergunta para a assistência:</strong> Com base nos textos de Salmo 119:23, 69, 78 e versículo 5, vocês notaram quais dificuldades o salmista passava?<br><br>
+                    <strong>Pontos de apoio (Respostas):</strong>
+                    <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                        <li>Vida imperfeita (como a nossa!)</li>
+                        <li>Enfrentando <strong>mentiras</strong> de más pessoas (v. 23, 69, 78)</li>
+                        <li>Lutava com <strong>desânimo</strong> por seus próprios erros (v. 5)</li>
+                        <li>Mesmo assim, ele orava "de todo o coração" e não deixou os problemas o afastarem de Jeová.</li>
+                    </ul>
+                    <hr style="margin: 15px 0; border-color: #cbd5e1;">
+                    <strong>INSIGHTS PARA COMPARTILHAR (Aplicação Poderosa):</strong><br>
+                    "Reparem: o salmista tinha <u>dois tipos de problemas</u>:<br>
+                    1. Problemas <strong>externos</strong> - pessoas inventando mentiras sobre ele.<br>
+                    2. Problemas <strong>internos</strong> - seus próprios erros e imperfeições.<br>
+                    Isso não lembra nossa vida? Enfrentamos oposição de fora E lutamos com nossas falhas por dentro. Mas veja: <strong>NADA disso impediu o salmista de orar 'de todo o coração'!</strong>"<br><br>
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §5:</span> "E quando nós cometemos um erro? Será que precisamos ter vergonha de orar a Jeová? Vamos ver no próximo parágrafo."
+                </div>
+            </div>
+        </article>
+
+        <!-- §5 -->
+        <article class="card p-6 border-l-4 border-gray-400" data-duration="3">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">5. Por que não devemos ter vergonha de orar, mesmo quando cometemos erros? Ilustre.</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">5</span> <span class="answer-highlight">Jeová convida até mesmo aqueles que cometeram pecados graves a orar para ele.</span> (Isa. 55:6, 7) Por isso, não devemos deixar que um ponto de vista negativo sobre nós mesmos nos impeça de orar. Pense na seguinte ilustração: um piloto de avião sabe que pode se comunicar com a torre de controle sempre que precisa de ajuda. Mas digamos que ele ficasse envergonhado por ter se perdido ou cometido um erro. Você acha que ele deveria deixar de entrar em contato com a torre? De jeito nenhum! <span class="answer-highlight">Da mesma maneira, quando nos sentimos perdidos ou cometemos um erro, não precisamos ter medo de abrir nosso coração para Jeová.</span> — Sal. 119:25, 176.
+            </div>
+            
+            <div class="caption-box mt-4 flex gap-3 items-start">
+                 <i data-lucide="plane" class="w-6 h-6 text-purple-700 mt-1 flex-shrink-0"></i>
+                 <div>
+                    <span class="font-bold text-sm block mb-1">ILUSTRAÇÃO</span>
+                    <p>O piloto e a torre de controle: Não deixe a vergonha impedir você de buscar ajuda.</p>
+                 </div>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>Pergunta Adicional:</strong> "Como a atitude do salmista no Salmo 119:176 nos ajuda a ter o ponto de vista correto sobre a oração mesmo quando erramos?"<br><br>
+                    
+                    <strong>Sobre Isaías 55:6, 7 (Destaque a generosidade):</strong><br>
+                    "Reparem na generosidade de Jeová. Ele não diz: 'Só orem se estiverem perfeitos'. Ele diz: 'Busquem-me! Mesmo que tenham errado muito, abandonem seus maus caminhos e venham falar comigo!' Que Deus maravilhoso!"<br><br>
+
+                    <strong>Sobre Ponto de Vista Negativo:</strong><br>
+                    "Às vezes o maior inimigo da nossa vida de oração não são as declarações externas, mas nossos próprios <strong>pensamentos autodestrutivos</strong>: 'Jeová não vai me ouvir... eu não mereço... já falhei tantas vezes...' Isso é mentira de Satanás!"<br><br>
+
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §6:</span> "Excelente! Então vimos nas duas primeiras declarações que podemos orar sem medo - porque Jeová é nosso amigo leal e porque ele convida até os mesmos que pecaram gravemente. Mas agora surge a pergunta prática: tá, mas COMO faço para abrir meu coração? É isso que veremos na próxima seção, começando no parágrafo 6."
+                </div>
+            </div>
+        </article>
+
+        <!-- ================= ABRIR O CORAÇÃO ================= -->
+        <div class="section-header">
+            <i data-lucide="key" class="w-6 h-6"></i> O que vai nos ajudar a abrir o coração?
+        </div>
+
+        <!-- §6-7 -->
+        <article class="card p-6 border-l-4 border-green-500 bg-green-50/20" data-duration="3">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">6-7. O que pode nos ajudar a orar de coração? Dê um exemplo. (Veja também a nota.)</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">6</span> Quando abrimos o coração para Jeová, contando os nossos pensamentos e sentimentos mais profundos, nos achegamos mais a ele. Que passos podem nos ajudar a fazer isso?
+            </div>
+            <div class="paragraph-text mt-4">
+                <span class="para-num">7</span> <strong><span class="answer-highlight">Medite nas qualidades de Jeová.</span></strong> <span class="answer-highlight">Quanto mais paramos para pensar nas qualidades de Jeová, mais fácil fica contar para ele tudo o que pensamos e sentimos.</span> (Sal. 145:8, 9, 18) Veja o exemplo de Kristine, uma irmã que tinha um pai violento. Ela diz: “Para mim, não era fácil ver Jeová como Pai e me abrir com ele. Eu achava que, por causa das minhas imperfeições, ele ia acabar me abandonando.” Que qualidade de Jeová ajudou Kristine? Ela conta: “<span class="answer-highlight">O amor leal de Jeová me dá a certeza de que ele me ama. ... Saber disso me ajuda a conseguir falar com ele sobre as minhas maiores alegrias e também sobre as minhas tristezas mais profundas.</span>”
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>Pergunta para a assistência:</strong><br>
+                    "Quais são as qualidades de Jeová descritas no texto de <strong>Salmo 145:8, 9, 18</strong> que mais tocam o seu coração e te ajudam a se abrir com Ele?"<br><br>
+                    <strong>Insight:</strong> "Quanto MAIS meditamos em como Jeová é - sua paciência, sua misericórdia, sua lealdade - MAIS natural fica falar tudo pra ele."<br><br>
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §8-9:</span> "Perfeito! Vimos o PRIMEIRO passo: meditar nas qualidades de Jeová. Agora vamos ver outros passos práticos nos parágrafos 8 e 9..."
+                </div>
+            </div>
+        </article>
+
+        <!-- §8-9 -->
+        <article class="card p-6 border-l-4 border-green-500 bg-green-50/20" data-duration="3">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">8-9. Com base no exemplo de Aliska, por que é bom pensar no que dizer antes de orar?</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">8</span> <strong><span class="answer-highlight">Pense no que vai dizer.</span></strong> Antes de orar, você pode fazer a si mesmo algumas perguntas como: ‘<span class="answer-highlight">Que problemas eu estou enfrentando agora? Será que eu preciso perdoar alguém? Estou passando por um novo desafio e preciso da ajuda de Jeová para superá-lo?</span>’ (2 Reis 19:15-19) Também podemos seguir o modelo que Jesus deixou por incluir em nossas orações pedidos relacionados com o nome, o Reino e a vontade de Jeová. — Mat. 6:9, 10.
+            </div>
+            <div class="paragraph-text mt-4">
+                <span class="para-num">9</span> Uma irmã chamada Aliska descobriu que o marido estava com câncer terminal no cérebro. No começo, não foi fácil para ela orar a Jeová. Ela lembra: “Eu fiquei tão aflita que achava difícil pensar com clareza no que ia dizer.” O que tem ajudado Aliska? Ela explica: “<span class="answer-highlight">Antes de orar, eu tiro um tempinho para organizar meus pensamentos, e isso me ajuda a não ficar falando só de mim mesma e da doença do meu marido. Assim eu fico mais calma e com a mente mais tranquila na hora de orar.</span>”
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>Pergunta sobre Aplicação (Aliska + Mateus 6:9, 10):</strong><br>
+                    "Como a irmã Aliska aplicou na oração dela os ensinamentos de Jesus que lemos em <strong>Mateus 6:9, 10</strong>?"<br>
+                    <em>(Ponto chave: Ela organizou os pensamentos para não orar apenas sobre seus próprios problemas, mas focar também na vontade de Deus, assim como Jesus ensinou.)</em><br><br>
+                    <hr style="margin: 15px 0; border-color: #cbd5e1;">
+
+                    <strong>INSIGHTS PARA COMPARTILHAR (Exemplo de Ezequias):</strong><br>
+                    "Irmãos, vejam o exemplo de Ezequias em 2 Reis 19. Ele estava em pânico - um exército poderoso cercava Jerusalém e tinha cartas ameaçadoras na mão. Mas reparem no versículo 14: ele PEGOU as cartas, LEU-AS, FOI ao templo, COLOCOU-AS diante de Jeová. Ou seja, ele <strong>ORGANIZOU seus pensamentos antes de orar!</strong>"<br><br>
+
+                    "E a oração dele responde exatamente as 3 perguntas do parágrafo:<br>
+                    1. <strong>Qual meu problema?</strong> → 'Senaqueribe está desafiando o Deus vivente' (v. 16)<br>
+                    2. <strong>Preciso ajustar minha atitude?</strong> → 'Não vou pedir vingança pessoal, mas que Teu nome seja santificado' (v. 19)<br>
+                    3. <strong>Qual minha necessidade?</strong> → 'Salva-nos para que todos saibam que Tu és Deus' (v. 19)<br><br>
+                    Viram? Ezequias <strong>PENSOU</strong> antes de orar. E o resultado? O versículo 20 diz que Jeová <strong>OUVIU</strong> a oração dele!"<br><br>
+
+                    <div style="background-color: #fee2e2; padding: 8px; border-radius: 4px; border: 1px solid #fecaca; color: #991b1b; font-weight: bold; font-size: 0.9em; margin-bottom: 10px;">
+                        ⏰ PONTO DE VERIFICAÇÃO DE TEMPO<br>
+                        Às 18:00 você DEVE estar encerrando o parágrafo 9.
+                    </div>
+
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §10:</span> "Excelente! Então temos dois passos até agora: meditar nas qualidades de Jeová E pensar no que vamos dizer. Agora o parágrafo 10 traz um TERCEIRO passo essencial. Vamos ver..."
+                </div>
+            </div>
+        </article>
+
+        <!-- §10 -->
+        <article class="card p-6 border-l-4 border-green-500 bg-green-50/20" data-duration="4">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">10. Por que é bom orar sem pressa? (Veja também as imagens.)</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">10</span> <strong><span class="answer-highlight">Ore sem pressa.</span></strong> É verdade que orações curtas podem ser profundas. Mas é bom orar sem pressa, <span class="answer-highlight">porque assim é mais provável conseguirmos expressar tudo o que sentimos e pensamos.</span> Elijah, marido de Aliska, conta: “Eu tento orar várias vezes por dia e, quando tiro tempo para fazer orações mais longas, sinto que a minha amizade com Jeová fica mais forte. Jeová nunca fica impaciente, querendo que eu termine logo a minha oração. Então eu sei que posso falar o quanto quiser.” Tente o seguinte: Encontre um horário e um lugar em que você possa orar sem distrações, talvez até em voz alta, e tenha o hábito de fazer orações sem pressa.
+            </div>
+            
+            <!-- IMAGEM DO PARÁGRAFO 10 - CORRIGIDA COM LINK ONLINE -->
+            <figure class="mt-4 mb-4">
+                <img src="https://cms-imgp.jw-cdn.org/img/p/w25/202510/univ/w25_202510_univ_cnt_2_xl.jpg" 
+                     alt="Irmão encontrando um lugar tranquilo para orar" 
+                     class="w-full rounded-lg shadow-md border border-gray-200">
+                <figcaption class="caption-box mt-2 flex items-start gap-3">
+                    <i data-lucide="image" class="w-5 h-5 text-gray-500 mt-1 flex-shrink-0"></i>
+                    <span class="font-bold text-gray-700 italic">Encontre um horário e um lugar para você orar sem pressa (Veja o parágrafo 10.)</span>
+                </figcaption>
+            </figure>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>INSIGHTS PARA COMPARTILHAR:</strong><br><br>
+                    <strong>Sobre orações curtas vs longas:</strong><br>
+                    "O parágrafo equilibra muito bem. Não é que orações curtas sejam ruins - muitas vezes fazemos orações breves e sinceras durante o dia. Mas TAMBÉM precisamos de momentos de orações mais longas, sem pressa, onde realmente despejamos o coração."<br><br>
+
+                    <div style="background-color: #fef9c3; padding: 10px; border-radius: 4px; border-left: 4px solid #facc15; color: #854d0e; font-size: 0.95em; margin: 10px 0;">
+                        <i data-lucide="alert-triangle" class="w-4 h-4 inline mr-1"></i> <strong>ALERTA IMPORTANTE (Nota de Rodapé):</strong><br>
+                        Lembre os irmãos: Embora em casa devamos orar sem pressa, a nota explica que <strong>"Geralmente, as orações feitas em público na congregação são bem breves."</strong> Isso mostra equilíbrio e respeito pelo tempo dos outros.
+                    </div>
+
+                    <strong>Sobre Elijah (marido da Aliska):</strong><br>
+                    "Reparem na situação dele: está com câncer terminal! Seria fácil ficar amargo ou desanimado. Mas ele faz o OPOSTO - aumentou a frequência E a qualidade das orações. Ele ora 'várias vezes por dia' E tira tempo para 'orações mais longas'."<br><br>
+
+                    <strong>A frase-chave de Elijah:</strong><br>
+                    "'Jeová nunca fica impaciente' - Que verdade libertadora! Às vezes temos pressa de terminar a oração, como se Jeová tivesse coisas mais importantes para fazer. Mas ele QUER nos ouvir! Ele tem todo o tempo do universo para você!"<br><br>
+
+                    <strong>Sobre orar em voz alta:</strong><br>
+                    "Notem a sugestão: 'talvez até em voz alta'. Por que isso ajuda? Porque:<br>
+                    1. Nos mantém focados (não divagamos mentalmente)<br>
+                    2. Ouvimos nossas próprias palavras<br>
+                    3. Parece mais uma 'conversa real' com Jeová"<br><br>
+
+                    <hr style="margin: 15px 0; border-color: #cbd5e1;">
+
+                    <strong>PERGUNTAS PARA FAZER AO EXPLORAR A IMAGEM:</strong><br>
+                    <em>Depois de descrever, você pode perguntar:</em><br><br>
+                    
+                    <strong>1. "O que na imagem mostra que esse irmão PLANEJOU esse momento de oração?"</strong><br>
+                    <em>Resposta esperada:</em> horário específico, lugar preparado, Bíblia já aberta.<br><br>
+
+                    <strong>2. "Por que acha que ele escolheu de manhã cedo?"</strong><br>
+                    <em>Resposta:</em> mente fresca, antes das preocupações do dia, siga o exemplo de Jesus (Marcos 1:35).<br><br>
+
+                    <strong>3. "Que 'distrações' ele evitou ao escolher esse lugar e horário?"</strong><br>
+                    <em>Respostas:</em> celular, TV, outras pessoas, barulho, compromissos.<br><br>
+
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §11 e Subtítulo:</span> "Perfeito! Aprendemos passos práticos: meditar nas qualidades de Jeová, pensar antes de orar, e orar sem pressa.<br>Mas há MAIS uma ferramenta que pode nos ajudar tremendamente. Veja o próximo subtítulo..."
+                </div>
+            </div>
+        </article>
+
+        <!-- ================= ORAÇÕES DA BÍBLIA ================= -->
+        <div class="section-header">
+            <i data-lucide="book" class="w-6 h-6"></i> Medite em orações da Bíblia
+        </div>
+
+        <!-- §11 + QUADRO -->
+        <div class="grid grid-cols-1 gap-6">
+            <article class="card p-6 border-l-4 border-gray-400" data-duration="3">
+                <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+                <div class="mb-4">
+                    <p class="question-text">11. Por que vale a pena meditar em orações profundas que encontramos na Bíblia? (Veja também o quadro “Você se sente como eles?”.)</p>
+                </div>
+                <div class="paragraph-text">
+                    <span class="para-num">11</span> Meditar em orações profundas e cânticos sagrados, ou salmos, que encontramos na Bíblia pode nos ajudar. <span class="answer-highlight">Analisar como servos de Deus do passado expressaram seus pensamentos mais profundos vai motivar você a também abrir seu coração para Jeová. Ver as palavras que eles usaram para louvar a Deus pode ajudá-lo a encontrar novas maneiras de se expressar em suas orações. E você talvez encontre orações de servos de Jeová que passaram por situações parecidas com a sua.</span>
+                </div>
+
+                <div class="notes-container">
+                    <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                    <div class="notes-box" contenteditable="true">
+                        <strong>TRÊS BENEFÍCIOS de meditar nessas orações:</strong><br><br>
+                        
+                        <strong>BENEFÍCIO 1: MOTIVAÇÃO</strong><br>
+                        "Analisar como servos de Deus do passado expressaram seus pensamentos mais profundos vai <strong>motivar você</strong> a também abrir seu coração para Jeová"<br><br>
+
+                        <strong>BENEFÍCIO 2: NOVAS FORMAS DE EXPRESSÃO</strong><br>
+                        "Ver as palavras que eles usaram para louvar a Deus pode <strong>ajudá-lo a encontrar novas maneiras de se expressar</strong> em suas orações"<br><br>
+
+                        <strong>BENEFÍCIO 3: IDENTIFICAÇÃO</strong><br>
+                        "Você talvez encontre orações de servos de Jeová que <strong>passaram por situações parecidas com a sua</strong>"<br><br>
+
+                        <hr style="margin: 15px 0; border-color: #cbd5e1;">
+
+                        <strong>SOBRE O QUADRO "VOCÊ SE SENTE COMO ELES?":</strong><br>
+                        “Vejam o quadro ao lado: 'Você se sente como eles?' Ele lista várias situações - ansiedade, sobrecarga, culpa após pecado, privilégio. <strong>Guardem esse quadro!</strong> Olha que importante matéria para fazer seu próximo estudo pessoal.”<br><br>
+
+                        <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §12:</span> "Perfeito! Vimos os benefícios de estudar orações bíblicas. Mas COMO fazer isso na prática? Que perguntas devemos fazer? O parágrafo 12 responde...."
+                    </div>
+                </div>
+            </article>
+
+            <!-- QUADRO -->
+            <aside class="bg-yellow-50 border border-yellow-200 rounded-lg p-6 shadow-sm">
+                <div class="flex items-center gap-2 mb-4 text-yellow-800">
+                    <i data-lucide="pin" class="w-5 h-5"></i>
+                    <h3 class="font-bold text-lg uppercase">Você se sente como eles?</h3>
+                </div>
+                <p class="mb-4 text-sm text-gray-700">Os servos fiéis do passado abriram o coração para Jeová em várias situações diferentes. Você se sente como eles?</p>
+                
+                <div class="space-y-3">
+                    <div class="bg-white p-3 rounded border border-yellow-100">
+                        <p class="text-sm">Quando <strong>Jacó</strong> estava ansioso, ele orou agradecendo a Jeová e mostrando o quanto confiava nele. — Gên. 32:9-12.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded border border-yellow-100">
+                        <p class="text-sm">Quando o jovem rei <strong>Salomão</strong> se sentiu sobrecarregado com a responsabilidade que tinha recebido de Deus, ele orou pedindo a ajuda de Jeová. — 1 Reis 3:7-9.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded border border-yellow-100">
+                        <p class="text-sm">Logo após o seu pecado com Bate-Seba, <strong>Davi</strong> orou suplicando a Jeová que criasse nele “um coração puro”. — Sal. 51:9-12.</p>
+                    </div>
+                    <div class="bg-white p-3 rounded border border-yellow-100">
+                        <p class="text-sm">Quando <strong>Maria</strong> recebeu um novo privilégio de serviço, ela orou louvando a Jeová. — Luc. 1:46-49.</p>
+                    </div>
+                </div>
+
+                <div class="mt-4 pt-4 border-t border-yellow-200">
+                    <p class="text-sm font-bold text-yellow-900">Projeto de estudo:</p>
+                    <p class="text-sm text-yellow-800">Leia uma oração de um servo fiel do passado e veja o que ele pediu para Jeová. Depois analise como Jeová respondeu essa oração. Então, coloque em prática as lições que aprendeu.</p>
+                </div>
+            </aside>
+        </div>
+
+        <!-- §12 -->
+        <article class="card p-6 border-l-4 border-gray-400" data-duration="3">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">12. Em que perguntas podemos pensar quando estivermos meditando em uma oração registrada na Bíblia?</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">12</span> Quando você ler uma oração registrada na Bíblia, pense no seguinte: ‘<span class="answer-highlight">Quem fez essa oração e o que estava acontecendo na vida dessa pessoa? Eu consigo me identificar com o que ela disse? Que lições posso aprender com essa oração?</span>’ Talvez seja preciso pesquisar um pouco mais para responder a essas perguntas, mas seu esforço vai valer a pena. Vamos ver alguns exemplos.
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §13:</span> "Agora vamos ver isso FUNCIONAR na prática! Os próximos parágrafos analisam orações específicas usando exatamente essas perguntas."
+                </div>
+            </div>
+        </article>
+
+        <!-- §13 (ANA) -->
+        <article class="card p-6 border-l-4 border-purple-500 bg-purple-50/20" data-duration="5">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">13. O que podemos aprender da oração de Ana? (1 Samuel 1:10, 11) (Veja também a imagem.)</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">13</span> <span class="scripture-link">Leia 1 Samuel 1:10, 11.</span> Quando Ana fez essa oração, ela estava enfrentando dois grandes problemas. Ela era estéril, e a outra esposa do marido dela não a deixava em paz. (1 Sam. 1:4-7) Mas Ana orou sem pressa e abriu o coração para Jeová. Assim ela se sentiu aliviada. (1 Sam. 1:12, 18) Se estiver enfrentando um problema que insiste em tirar a sua paz, o que você pode aprender da oração de Ana? <span class="answer-highlight">Quando ‘lançamos nosso fardo sobre Jeová’, contando para ele todos os nossos problemas e como nos sentimos, também ficamos aliviados.</span> — Sal. 55:22.
+            </div>
+            
+            <!-- IMAGEM DO PARÁGRAFO 13 - CORRIGIDA COM LINK ONLINE -->
+            <figure class="mt-4 mb-4">
+                <img src="https://cms-imgp.jw-cdn.org/img/p/w25/202510/univ/w25_202510_univ_cnt_3_xl.jpg" 
+                     alt="Ana orando a Jeová" 
+                     class="w-full rounded-lg shadow-md border border-gray-200">
+                <figcaption class="caption-box mt-2 flex items-start gap-3">
+                    <i data-lucide="image" class="w-5 h-5 text-gray-500 mt-1 flex-shrink-0"></i>
+                    <span class="font-bold text-gray-700 italic">Ana era estéril, e a outra esposa do marido dela não a deixava em paz. Então ela abriu o coração para Jeová em oração. (Veja o parágrafo 13.)</span>
+                </figcaption>
+            </figure>
+
+            <!-- LEITURA BÍBLICA: 1 Samuel 1:10, 11 -->
+            <div class="bible-read-box">
+                <div class="bible-ref-title"><i data-lucide="book-open" class="w-4 h-4"></i> 1 Samuel 1:10, 11</div>
+                <div class="bible-content">
+                    <span class="verse-num">10</span> Ana estava muito angustiada, e começou a orar a Jeová e a chorar sem parar.<br>
+                    <span class="verse-num">11</span> E ela fez o seguinte voto: “Ó Jeová dos exércitos, se olhares para a aflição da tua serva e te lembrares de mim, e não te esqueceres da tua serva e deres à tua serva um filho, um menino, eu o entregarei a Jeová por todos os dias da sua vida, e não se passará navalha na sua cabeça.”
+                </div>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <div style="background-color: #dbeafe; border-left: 4px solid #2563eb; color: #1e40af; padding: 10px; font-weight: bold; margin-bottom: 15px;">
+                        <i data-lucide="mic" class="w-4 h-4 inline mr-1"></i> ATENÇÃO: CHAMAR LEITURA DE 1 SAMUEL 1:10, 11 IMEDIATAMENTE!
+                    </div>
+
+                    <strong>INSIGHTS PARA COMPARTILHAR:</strong><br><br>
+
+                    <strong>Sobre os DOIS problemas de Ana:</strong><br>
+                    "Reparem: Ana não tinha só UM problema, tinha DOIS, e eles se alimentavam mutuamente! A esterilidade já era difícil, mas Penina transformava isso em tormento diário. E o pior: um problema ela não podia controlar (esterilidade), e o outro ela não conseguia parar (a crueldade de Penina). Quantos de nós não enfrentamos situações assim - problemas sobre os quais temos pouco ou nenhum controle?"<br><br>
+
+                    <strong>Sobre Ana não desistir de adorar:</strong><br>
+                    "Vejam que incrível: mesmo sabendo que Penina ia atormentá-la em Silo, ANA CONTINUOU INDO! Ela não disse: 'Ah, esse ano não vou, é muito doloroso.' A Torre de Vigia explica: 'Ana deu um valioso exemplo... Nunca devemos permitir que a má conduta de outros atrapalhe nossa adoração a Deus'. Que lição para nós quando há atritos na congregação!"<br><br>
+
+                    <strong>Sobre a transformação imediata:</strong><br>
+                    "Aqui está algo extraordinário: Jeová NÃO respondeu a oração na hora. Ana não engravidou naquele dia. Eli apenas disse 'que Deus te conceda teu pedido' - Mas mesmo assim, versículo 18: 'seu semblante não estava mais preocupado'. POR QUÊ? Porque ela TRANSFERIU o peso para Jeová. Não precisamos esperar a SOLUÇÃO do problema para sentir ALÍVIO - só precisamos abrir o coração!"<br><br>
+
+                    <strong>Sobre Salmo 55:22:</strong><br>
+                    "'Lance seu fardo sobre Jeová' - A palavra 'lançar' é forte! Não é 'colocar delicadamente'. É LANÇAR, como quando você está carregando um peso insuportável e finalmente pode soltar. E reparem: não diz 'lance PARTE do fardo'. Diz lance TODO o fardo - todos os problemas, todos os sentimentos!"<br><br>
+
+                    <hr style="margin: 15px 0; border-color: #cbd5e1;">
+
+                    <strong>❓ PERGUNTAS ADICIONAIS (escolha 2-3, você tem 5 minutos!)</strong><br>
+                    <strong>Perguntas de contexto:</strong><br>
+                    "Por que a esterilidade de Ana era um sofrimento tão grande para uma mulher israelita?"<br><br>
+
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §14:</span> "Muito bom! Vimos a PRIMEIRA oração de Ana - quando ela estava aflita. Mas a história não termina aí! O parágrafo 14 mostra o que MAIS podemos aprender do exemplo dela. [Nome], parágrafo 14..."
+                </div>
+            </div>
+        </article>
+
+        <!-- §14 -->
+        <article class="card p-6 border-l-4 border-purple-500 bg-purple-50/20" data-duration="3">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">14. (a) O que mais podemos aprender com o exemplo de Ana? (b) O que ajudou Ana a melhorar suas orações, e o que aprendemos disso? (Veja a nota.)</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">14</span> Ana teve um filho chamado Samuel. Alguns anos depois de ele nascer, ela o levou ao sumo sacerdote Eli. (1 Sam. 1:24-28) Orando de todo o coração, ela agradeceu a Jeová por ele proteger seus servos leais e cuidar deles. (1 Sam. 2:1, 8, 9) Os problemas de Ana não desapareceram, mas <span class="answer-highlight">ela se concentrou nas bênçãos que Jeová tinha dado a ela.</span> Qual é a lição para nós? <span class="answer-highlight-b">Se nos concentrarmos no que Jeová já fez e continua fazendo para nos apoiar, vamos conseguir perseverar ao enfrentar dificuldades.</span>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <div style="background-color: #fef9c3; border-left: 4px solid #facc15; color: #854d0e; padding: 10px; font-weight: bold; margin-bottom: 10px;">
+                        <i data-lucide="message-circle" class="w-4 h-4 inline mr-1"></i> LEMBRETE IMPORTANTE:<br>
+                        Pedir para alguém comentar a NOTA DE RODAPÉ (c).<br>
+                        <span style="font-weight: normal; font-size: 0.9em;">(Ela explica que Ana citou Moisés e, séculos depois, Maria citou Ana. Mostra a importância de conhecer as Escrituras!)</span>
+                    </div>
+
+                    <strong>Sobre a nota [c] - O SEGREDO REVELADO:</strong><br>
+                    "Vejam a nota [c] - ela mostra que Ana usou palavras de <strong>Deuteronômio 4, 8 e 32</strong> em sua oração. Isso prova que ela não orou 'de improviso'. Ela <strong>ESTUDOU, MEDITOU</strong>, e isso moldou suas palavras!<br>
+                    Quando enchemos nossa mente com as verdades de Jeová, nossas orações se transformam naturalmente."
+
+                    <hr style="margin: 15px 0; border-color: #cbd5e1;">
+
+                    <strong>INSIGHT PARA COMPARTILHAR (A Realidade de Ana):</strong><br>
+                    O parágrafo é claro: "Os problemas de Ana não desapareceram".<br>
+                    <strong>Que problemas permaneciam?</strong><br>
+                    <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                        <li>Penina ainda estava lá (a provocadora).</li>
+                        <li>Ana estava <strong>entregando seu único filho</strong> - dor imensa!</li>
+                        <li>Teria que voltar para casa <strong>sem Samuel</strong>.</li>
+                        <li>Não veria o filho crescer diariamente.</li>
+                    </ul><br>
+                    
+                    <strong>MAS ANA SE CONCENTROU NAS BÊNÇÃOS:</strong><br>
+                    <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                        <li>Jeová a havia <strong>abençoado com um filho</strong>.</li>
+                        <li>Jeová <strong>continuava cuidando dela</strong>.</li>
+                        <li>Jeová era <strong>confiável como uma rocha</strong>.</li>
+                    </ul><br>
+
+                    <strong>Conexão com nossos dias:</strong><br>
+                    "Quantos irmãos hoje não enfrentam isso? Oraram por algo, Jeová ajudou, mas outros problemas continuam. Ou até surgem novos desafios! A lição de Ana: mesmo quando os problemas não desaparecem totalmente, podemos ter <strong>PAZ e até ALEGRIA</strong> se nos concentrarmos nas bênçãos e no cuidado constante de Jeová."<br><br>
+
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §15:</span> "Perfeito! Ana nos ensinou duas lições: orar na crise E orar com gratidão. Agora o parágrafo 15 mostra o profeta Jeremias orando em outra situação difícil. Leia Jeremias 12:1."
+                </div>
+            </div>
+        </article>
+
+        <!-- §15 (JEREMIAS) -->
+        <article class="card p-6 border-l-4 border-gray-400" data-duration="4">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">15. O que podemos fazer quando nos sentimos como o profeta Jeremias? (Jeremias 12:1)</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">15</span> <span class="scripture-link">Leia Jeremias 12:1.</span> Quando o profeta Jeremias viu que muitas pessoas más pareciam ter uma vida boa e feliz, ele ficou desanimado. Ele também ficou muito triste ao ser maltratado por seus irmãos israelitas. (Jer. 20:7, 8) Sem acusar Deus de ser injusto, Jeremias contou para Jeová todas as suas frustrações. Mais tarde, ele viu como Jeová corrigiu os israelitas rebeldes, e isso deve ter aumentado sua confiança na justiça de Deus. (Jer. 32:19) Nós também quando somos humilhados ou vemos pessoas desonestas se dando bem, podemos nos sentir como Jeremias. <span class="answer-highlight">Mas assim como ele, podemos falar abertamente com Jeová sobre as nossas frustrações, confiando que no tempo certo Jeová vai corrigir todas as injustiças que acontecem à nossa volta.</span>
+            </div>
+
+            <!-- LEITURA BÍBLICA: Jeremias 12:1 -->
+            <div class="bible-read-box">
+                <div class="bible-ref-title"><i data-lucide="book-open" class="w-4 h-4"></i> Jeremias 12:1</div>
+                <div class="bible-content">
+                    <span class="verse-num">1</span> Tu és justo, ó Jeová, quando apresento a ti a minha queixa,<br>
+                    Quando falo contigo sobre questões de justiça.<br>
+                    Mas por que os maus são bem-sucedidos no seu caminho?<br>
+                    E por que os traiçoeiros vivem tranquilos?
+                </div>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>INSIGHT PARA COMPARTILHAR (Aplicação para nós hoje):</strong><br>
+                    "Nós também, quando somos humilhados (como Jeremias foi) OU quando vemos pessoas desonestas se dando bem (como ele viu) - podemos nos sentir EXATAMENTE como Jeremias.<br><br>
+                    E a lição? <strong>Fale abertamente com Jeová!</strong> Não guarde a frustração. Não deixe a amargura crescer. Conte tudo para ele. E confie que Ele VAI corrigir todas as injustiças no tempo certo."
+                </div>
+            </div>
+        </article>
+
+        <!-- §16 (LEVITA) -->
+        <article class="card p-6 border-l-4 border-gray-400" data-duration="5">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">16. O que podemos aprender da oração de um levita que não podia adorar no templo? (Salmo 42:1-4) (Veja também as imagens.)</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">16</span> <span class="scripture-link">Leia Salmo 42:1-4.</span> Esse salmo foi escrito por um levita que estava impossibilitado de adorar no templo com outros israelitas. Suas palavras mostram como ele estava se sentindo. Se estivermos presos por causa de nossa fé ou tivermos uma doença que nos impede de sair de casa, talvez nos sintamos como esse levita. Pode ser que nossas emoções fiquem instáveis, mas <span class="answer-highlight">é bom contar para Jeová o que estamos sentindo. Isso pode nos ajudar a entender melhor os nossos sentimentos e a ver as coisas de outro ângulo.</span> Por exemplo, o levita percebeu que ele ainda teria outras oportunidades para louvar a Jeová. (Sal. 42:5) Ele também tirou tempo para pensar em como Jeová estava cuidando dele. (Sal. 42:8) <span class="answer-highlight">Orar de coração a Jeová pode nos ajudar a entender melhor nossos sentimentos, recuperar o equilíbrio e ter forças para perseverar.</span>
+            </div>
+            
+            <!-- IMAGEM DO PARÁGRAFO 16 - CORRIGIDA COM LINK ONLINE -->
+            <figure class="mt-4 mb-4">
+                <img src="https://cms-imgp.jw-cdn.org/img/p/w25/202510/univ/w25_202510_univ_cnt_4_xl.jpg" 
+                     alt="Levita orando e irmão no hospital" 
+                     class="w-full rounded-lg shadow-md border border-gray-200">
+                <figcaption class="caption-box mt-2 flex items-start gap-3">
+                    <i data-lucide="image" class="w-5 h-5 text-gray-500 mt-1 flex-shrink-0"></i>
+                    <span class="font-bold text-gray-700 italic">O levita que escreveu o Salmo 42 derramou o coração para Jeová. Quando contamos para Jeová tudo o que estamos sentindo, podemos ver as coisas de outro ângulo. (Veja o parágrafo 16.)</span>
+                </figcaption>
+            </figure>
+
+            <!-- LEITURA BÍBLICA: Salmo 42:1-4 -->
+            <div class="bible-read-box">
+                <div class="bible-ref-title"><i data-lucide="book-open" class="w-4 h-4"></i> Salmo 42:1-4</div>
+                <div class="bible-content">
+                    <span class="verse-num">1</span> Como uma corça que anseia por correntes de água,<br>
+                    Eu anseio por ti, ó Deus.<br>
+                    <span class="verse-num">2</span> Estou sedento de Deus, do Deus vivente.<br>
+                    Quando poderei ir para comparecer perante Deus?<br>
+                    <span class="verse-num">3</span> Minhas lágrimas são o meu alimento dia e noite;<br>
+                    O dia inteiro as pessoas zombam de mim, perguntando: “Onde está o seu Deus?”<br>
+                    <span class="verse-num">4</span> Lembro-me destas coisas, e eu derramo a minha alma,<br>
+                    Pois eu costumava andar com a multidão;<br>
+                    Eu caminhava solenemente à frente deles até a casa de Deus,<br>
+                    Entre gritos de alegria e agradecimento,<br>
+                    De uma multidão celebrando uma festividade.
+                </div>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>INSIGHTS PARA COMPARTILHAR (Lições do Levita):</strong><br>
+                    <em>Para você apresentar aos irmãos:</em><br>
+                    <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                        <li><strong>Seja honesto sobre emoções instáveis</strong> - não esconda de Jeová.</li>
+                        <li><strong>Ore para ENTENDER seus sentimentos</strong> - funciona como terapia espiritual.</li>
+                        <li><strong>Lembre-se de bênçãos passadas</strong> - fortalece a esperança de alegria futura.</li>
+                        <li><strong>Medite no cuidado PRESENTE de Jeová</strong> - restaura o equilíbrio.</li>
+                        <li><strong>Persevere sem solução imediata</strong> - a oração dá forças para esperar.</li>
+                        <li><strong>Valorize a adoração em grupo</strong> - sentir falta é saudável!</li>
+                        <li><strong>Use Salmos como suas orações</strong> - quando não achar palavras.</li>
+                    </ul>
+                    <hr style="margin: 15px 0; border-color: #cbd5e1;">
+                    <strong>INSIGHT SOBRE A CORÇA (Salmo 42:1):</strong><br>
+                    "Irmãos, reparem num detalhe fascinante sobre a corça! Publicações explicam que quando uma corça está sedenta em região árida, ela <strong>VAI BUSCAR ÁGUA</strong> mesmo sabendo que isso pode <strong>EXPÔ-LA A PREDADORES!</strong> Por quê? Porque a necessidade de água é MAIOR que o medo dos inimigos!<br><br>
+                    
+                    <strong>Apliquem isso:</strong> O levita estava dizendo 'Minha necessidade de adorar a Jeová é tão vital que eu enfrentaria QUALQUER PERIGO para estar no templo!' Temos essa mesma sede espiritual? Valorizamos tanto a adoração que nada nos impediria?"<br><br>
+
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §17:</span> "Perfeito! O levita nos ensinou a orar quando isolados. Mas há MAIS um exemplo antes de encerrarmos esta seção - e é o mais dramático! Jonas orando de dentro de um grande peixe! E vamos ver por que é bom DECORAR trechos dos Salmos. Parágrafo 17, Leia Jonas 2:1, 2."
+                </div>
+            </div>
+        </article>
+
+        <!-- §17 (JONAS) -->
+        <article class="card p-6 border-l-4 border-gray-400" data-duration="3">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">17. (a) O que podemos aprender com a oração de Jonas? (Jonas 2:1, 2) (b) Por que é bom decorar certas passagens da Bíblia, como trechos dos Salmos? (Veja a nota.)</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">17</span> <span class="scripture-link">Leia Jonas 2:1, 2.</span> O profeta Jonas fez essa oração enquanto estava na barriga de um grande peixe. <span class="answer-highlight">Apesar de ter desobedecido a Jeová, ele tinha certeza de que Deus ia escutá-lo.</span> Em sua oração, Jonas usou muitas expressões que encontramos nos Salmos. Então é provável que ele conhecia bem essas passagens. Meditar nelas deu a Jonas a confiança de que Jeová o ajudaria. Da mesma forma, é bom decorarmos alguns textos da Bíblia. <span class="answer-highlight-b">Assim, quando orarmos em situações difíceis, podemos lembrar deles e ser consolados.</span>
+            </div>
+
+            <!-- LEITURA BÍBLICA: Jonas 2:1, 2 -->
+            <div class="bible-read-box">
+                <div class="bible-ref-title"><i data-lucide="book-open" class="w-4 h-4"></i> Jonas 2:1, 2</div>
+                <div class="bible-content">
+                    <span class="verse-num">1</span> Então Jonas orou a Jeová, seu Deus, do ventre do peixe,<br>
+                    <span class="verse-num">2</span> dizendo: “Na minha aflição clamei a Jeová, e ele me respondeu.<br>
+                    Das profundezas da Sepultura clamei por ajuda.<br>
+                    Ouviste a minha voz.”
+                </div>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>INSIGHT PARA COMPARTILHAR (A "Barriga de Peixe"):</strong><br>
+                    "Nós também - quando passarmos por 'barriga de peixe' (prisão, doença grave, depressão profunda, perseguição) - se tivermos <strong>DECORADO</strong> textos bíblicos, especialmente Salmos, teremos:<br>
+                    <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                        <li><strong>PALAVRAS</strong> para orar quando não conseguimos formular</li>
+                        <li><strong>CONFIANÇA</strong> de que Jeová ouve</li>
+                        <li><strong>CONSOLO</strong> mesmo na escuridão</li>
+                    </ul>
+                    Então não é apenas 'bonito' decorar versículos - é <strong>ESTRATÉGICO para sobrevivência espiritual!</strong>"<br><br>
+
+                    <strong>Pergunta Adicional para a Assistência:</strong><br>
+                    "E você, tem algum texto que decorou e que tem te ajudado a perseverar em momentos de aflição?"<br><br>
+
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §18-19 e Subtítulo:</span> "Mas agora surge uma pergunta importante: E SE estivermos TÃO angustiados que não conseguimos nem formular palavras? O que fazer nesses momentos? A última seção do estudo responde! Vejam o subtítulo..."
+                </div>
+            </div>
+        </article>
+
+        <!-- ================= CONTINUE ORANDO ================= -->
+        <div class="section-header">
+            <i data-lucide="infinity" class="w-6 h-6"></i> Continue fazendo orações
+        </div>
+
+        <!-- §18-19 -->
+        <article class="card p-6 border-l-4 border-gray-400" data-duration="3">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">18-19. Que garantia Romanos 8:26, 27 nos dá? Dê um exemplo.</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">18</span> <span class="scripture-link">Leia Romanos 8:26, 27.</span> Às vezes, ficamos tão ansiosos que não conseguimos explicar para Jeová como estamos nos sentindo. Mas podemos contar com uma grande ajuda. Nessas ocasiões, o espírito santo de Deus “intercede” por nós. Como isso acontece? Jeová usou seu espírito santo para orientar os escritores da Bíblia a registrar muitas orações. <span class="answer-highlight">Quando não conseguimos expressar claramente os nossos pensamentos em oração, Jeová pode ver certas partes das orações registradas na sua Palavra como se fossem os nossos pedidos a ele. E ele pode responder essas orações como se fossem nossas.</span>
+            </div>
+            <div class="paragraph-text mt-4">
+                <span class="para-num">19</span> Saber disso ajudou uma irmã da Rússia chamada Yelena. Ela foi presa por orar e ler a Bíblia. Yelena ficou tão angustiada que achava difícil fazer orações. Ela conta: “Mas aí eu lembrei que, quando me sinto sobrecarregada e não sei o que pedir em oração, Jeová pode aceitar as orações . . . de seus servos do passado como se fossem minhas. Isso me consolou muito durante esse período bem difícil.”
+            </div>
+
+            <!-- LEITURA BÍBLICA: Romanos 8:26, 27 -->
+            <div class="bible-read-box">
+                <div class="bible-ref-title"><i data-lucide="book-open" class="w-4 h-4"></i> Romanos 8:26, 27</div>
+                <div class="bible-content">
+                    <span class="verse-num">26</span> Do mesmo modo, o espírito também nos ajuda na nossa fraqueza; pois o problema é que às vezes não sabemos o que precisamos pedir em oração, mas o próprio espírito intercede por nós com gemidos não pronunciados.<br>
+                    <span class="verse-num">27</span> No entanto, aquele que examina os corações sabe a intenção do espírito, porque este intercede a favor dos santos em harmonia com a vontade de Deus.
+                </div>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>Aplicação consoladora:</strong><br>
+                    "Irmãos, isto é para TODOS nós em algum momento da vida:<br>
+                    <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                        <li>Quando recebermos notícia devastadora e não soubermos o que dizer</li>
+                        <li>Quando estivermos tão deprimidos que só conseguimos chorar</li>
+                        <li>Quando presos, torturados, traumatizados</li>
+                        <li>Quando a dor for tão grande que palavras não existem</li>
+                    </ul><br>
+                    
+                    <strong>NESSES MOMENTOS:</strong> Não desistam! Jeová ENTENDE gemidos. O espírito INTERCEDE. As orações da Bíblia se tornam SUAS!"<br><br>
+
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §20:</span> "Muito bom! Vimos que mesmo quando não conseguimos orar, o espírito intercede. Mas há MAIS ajuda disponível! O parágrafo 20 dá sugestões práticas para quando estamos ansiosos. [Nome], por favor..."
+                </div>
+            </div>
+        </article>
+
+        <!-- §20 -->
+        <article class="card p-6 border-l-4 border-gray-400" data-duration="2">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">20. Quando estamos ansiosos, como podemos preparar nossa mente para orar?</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">20</span> Quando estamos ansiosos e vamos orar, podemos ficar distraídos e ter dificuldade para nos concentrar. <span class="answer-highlight">Para preparar nossa mente, podemos escutar o áudio de alguns Salmos. Também podemos tentar escrever o que estamos sentindo, assim como Davi fez.</span> (Sal. 18; 34; 142; cabeçalhos) A verdade é que não existe uma receita pronta de como devemos nos preparar para fazer uma oração. (Sal. 141:2) Então, tente descobrir o que é melhor para você.
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>🎯 PONTOS PRINCIPAIS PARA DESTACAR:</strong><br><br>
+                    
+                    <strong>O PROBLEMA:</strong> A ansiedade causa distração. A mente fica agitada, pulando de pensamento em pensamento, prejudicando o foco.<br><br>
+
+                    <strong>A SOLUÇÃO: PREPARAR A MENTE</strong><br>
+                    <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                        <li><strong>Sugestão 1: Escutar áudio de Salmos</strong><br>
+                        <em>Por que funciona:</em> Acalma a mente, coloca pensamentos em perspectiva divina. <em>Dica:</em> Escute ANTES de orar (áudio do JW Library).</li>
+                        
+                        <li><strong>Sugestão 2: Escrever o que estamos sentindo</strong><br>
+                        <em>Modelo Bíblico:</em> Davi escreveu Salmos em momentos críticos (Salmos 18, 34, 51, 142).<br>
+                        <em>Por que funciona:</em> Organiza pensamentos confusos, dá clareza e permite processar emoções antes de orar.</li>
+                    </ul><br>
+
+                    <strong>A LIBERDADE (Salmo 141:2):</strong> "Não existe receita pronta". Tente descobrir o que é melhor para VOCÊ.<br><br>
+
+                    <hr style="margin: 15px 0; border-color: #cbd5e1;">
+
+                    <strong>💡 INSIGHTS PARA COMPARTILHAR:</strong><br><br>
+                    
+                    <strong>Sobre distrações durante a ansiedade:</strong><br>
+                    "Filipenses 4:6 diz 'Não estejais ansiosos' e incentiva a orar. Mas aqui está o problema: quando estamos ANSIOSOS, é justamente quando é mais DIFÍCIL orar! A mente fica agitada. Tentamos orar e... DISTRAÇÃO! Por isso precisamos <strong>PREPARAR a mente primeiro</strong>."<br><br>
+
+                    <strong>Sobre escutar (não ler) Salmos:</strong><br>
+                    "Reparem: o parágrafo diz 'escutar o áudio de alguns Salmos'. Não diz 'ler'. Por quê? Porque quando ansioso, até LER pode ser difícil - a mente não fixa. Mas <strong>ESCUTAR é mais passivo</strong>, permite que a Palavra ENTRE mesmo quando não conseguimos focar ativamente. O áudio faz o trabalho POR você!"<br><br>
+
+                    <strong>Sobre os cabeçalhos dos Salmos:</strong><br>
+                    "O parágrafo menciona 'Salmos 18; 34; 142; cabeçalhos'. O que eles revelam? Que Davi <strong>ESCREVEU</strong> aqueles Salmos em situações específicas (fugindo de Saul, na caverna, após pecado). Davi usou a ESCRITA como ferramenta de processamento emocional ANTES ou DURANTE a oração!"<br><br>
+
+                    <strong>SOBRE A "RECEITA PRONTA" (Liberdade):</strong><br>
+                    "Que libertador! O parágrafo diz: 'Não existe uma receita pronta'. Isso significa:<br>
+                    ❌ NÃO precisa fazer exatamente como fulano faz<br>
+                    ❌ NÃO existe 'jeito certo' único<br>
+                    ✅ Experimente escutar Salmos - funciona para você?<br>
+                    ✅ Experimente escrever - ajuda você?<br>
+                    ✅ Descubra <strong>SEU</strong> método!"<br><br>
+
+                    <span style="color: #6b21a8; font-weight: bold;">➝ Transição para o §21:</span> "Agora o parágrafo 21 conclui com um incentivo final. [Nome], por favor..."
+                </div>
+            </div>
+        </article>
+
+        <!-- §21 -->
+        <article class="card p-6 border-l-4 border-purple-500 bg-purple-50" data-duration="2">
+            <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="mb-4">
+                <p class="question-text">21. Por que podemos orar a Jeová de todo o coração?</p>
+            </div>
+            <div class="paragraph-text">
+                <span class="para-num">21</span> <span class="answer-highlight">É consolador saber que Jeová entende os nossos sentimentos mesmo antes de contarmos qualquer coisa para ele.</span> (Sal. 139:4) Mesmo assim, ele fica feliz de escutar quando oramos mostrando total confiança nele. Então, não tenha medo de orar ao seu Pai celestial. Use as orações registradas na Bíblia como uma fonte de inspiração. Ore de todo o coração. Conte para ele suas alegrias e tristezas. <span class="answer-highlight">Jeová é o seu melhor Amigo; ele sempre vai estar do seu lado!</span>
+            </div>
+
+            <div class="notes-container">
+                <span class="notes-label"><i data-lucide="edit-3" class="w-3 h-3"></i> Notas do Dirigente</span>
+                <div class="notes-box" contenteditable="true">
+                    <strong>INSIGHTS PARA COMPARTILHAR (Conclusão):</strong><br><br>
+                    
+                    <strong>Sobre "entende mesmo antes de contarmos":</strong><br>
+                    "Que verdade consoladora! Salmo 139:4 diz: 'Antes mesmo de eu dizer uma palavra, ó Jeová, tu já sabes tudo sobre ela'. Pensem nisso! Quando você está lutando para formular palavras numa oração - Jeová <strong>JÁ ENTENDEU!</strong> Quando você está confuso sobre o que pedir - Jeová <strong>JÁ SABE</strong> o que você precisa! Isso tira toda pressão de 'orar certo'!"<br><br>
+
+                    <strong>Sobre "ele fica feliz de escutar":</strong><br>
+                    "Mas se Jeová já sabe tudo, por que orar? Porque 'ele fica <strong>FELIZ</strong> de escutar'! É como um pai com filho pequeno. O pai JÁ SABE que o filho teve um dia bom na escola. Mas quando o filho chega correndo para CONTAR - o pai fica FELIZ de ouvir! Não é sobre informação. É sobre <strong>RELACIONAMENTO!</strong> Jeová QUER que conversemos com Ele!"
+                </div>
+            </div>
+        </article>
+
+        <!-- RECAPITULAÇÃO -->
+        <section class="card p-6 border-t-4 border-purple-700 mt-8" data-duration="3">
+             <div class="time-badge"><i data-lucide="clock" class="w-3 h-3"></i> <span class="time-display">--:--</span></div>
+            <div class="flex justify-between items-center mb-6">
+                <h3 class="font-bold text-xl text-gray-800 uppercase flex items-center gap-2">
+                    <i data-lucide="rotate-ccw" class="w-5 h-5"></i> Como responderia?
+                </h3>
+            </div>
+            <div class="space-y-6">
+                <div class="border-b border-gray-100 pb-4">
+                    <p class="font-bold text-purple-900 mb-2">O que pode ajudar você a orar a Jeová sem medo?</p>
+                    <div class="notes-box" contenteditable="true">
+                        <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                            <li>Entender que Jeová é um <strong>amigo leal</strong> que quer o nosso bem (Sal. 119:145).</li>
+                            <li>Lembrar que ele <strong>convida até quem cometeu erros graves</strong> a voltar para ele (Isa. 55:6, 7).</li>
+                            <li><strong>Ilustração do piloto:</strong> Assim como um piloto perdido não tem vergonha de chamar a torre, não devemos ter vergonha de orar quando erramos.</li>
+                        </ul>
+                    </div>
+                </div>
+                <div class="border-b border-gray-100 pb-4">
+                    <p class="font-bold text-purple-900 mb-2">Que passos podem ajudar você a abrir o coração para Jeová?</p>
+                    <div class="notes-box" contenteditable="true">
+                        <ol style="list-style-type: decimal; margin-left: 1.5rem;">
+                            <li><strong>Meditar nas qualidades de Jeová</strong> (como seu amor leal e misericórdia).</li>
+                            <li><strong>Pensar no que vai dizer</strong> antes de orar (organizar os pensamentos, como Ezequias).</li>
+                            <li><strong>Orar sem pressa</strong> (encontrar um horário e lugar tranquilo para despejar o coração).</li>
+                        </ol>
+                    </div>
+                </div>
+                <div>
+                    <p class="font-bold text-purple-900 mb-2">Por que é bom meditar em orações profundas que encontramos na Bíblia?</p>
+                    <div class="notes-box" contenteditable="true">
+                        <ul style="list-style-type: disc; margin-left: 1.5rem;">
+                            <li>Isso nos <strong>motiva</strong> a também abrir nosso coração.</li>
+                            <li>Aprendemos <strong>novas maneiras de nos expressar</strong> (palavras e sentimentos).</li>
+                            <li>Encontramos servos do passado que viveram <strong>situações parecidas</strong> com a nossa (identificação e consolo).</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+        
+        <!-- FOOTER -->
+        <footer class="text-center py-10 text-gray-500 text-sm">
+            <p class="font-bold text-purple-700 text-lg mb-2">Cântico 45: Os pensamentos do meu coração</p>
+            <p>Fim do estudo</p>
+        </footer>
+
+    </main>
+
+    <!-- Botão Topo -->
+    <button onclick="window.scrollTo({top: 0, behavior: 'smooth'})" class="fixed bottom-6 right-6 bg-purple-700 text-white p-3 rounded-full shadow-lg hover:bg-purple-800 transition lg:hidden z-40 opacity-80 hover:opacity-100">
+        <i data-lucide="arrow-up" class="w-6 h-6"></i>
+    </button>
+
+    <script>
+        // Ícones
+        lucide.createIcons();
+
+        // Relógio
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Toggle Highlights
+        function toggleHighlights() {
+            document.body.classList.toggle('hide-highlights');
+        }
+
+        // Menu Mobile
+        function toggleMenu() {
+            const controls = document.getElementById('viewControls');
+            controls.classList.toggle('hidden');
+            controls.classList.toggle('flex');
+        }
+
+        // Lógica de Recálculo de Tempo
+        function recalculateTimes() {
+            const startTimeInput = document.getElementById('startTime').value; // ex: "17:43"
+            if (!startTimeInput) return;
+
+            // Converter Horário de Início para objeto Date (usando a data de hoje)
+            const [startHour, startMinute] = startTimeInput.split(':').map(Number);
+            const now = new Date();
+            let start = new Date(now.getFullYear(), now.getMonth(), now.getDate(), startHour, startMinute);
+
+            // Horário Fixo de Término: 18:40
+            let end = new Date(now.getFullYear(), now.getMonth(), now.getDate(), 18, 40);
+
+            // Se o início for depois do fim (ex: reunião de manhã ou madrugada), ajustar data (simplificado)
+            // Aqui assumimos que é tudo no mesmo dia entre 17h e 19h conforme contexto.
+
+            // Calcular tempo disponível em minutos
+            const diffMs = end - start;
+            let availableMinutes = Math.floor(diffMs / 60000);
+
+            if (availableMinutes <= 0) {
+                // Caso extremo: começou depois de 18:40, mostrar erro ou tempos zerados
+                document.querySelectorAll('.time-display').forEach(el => el.textContent = "Sem tempo!");
+                return;
+            }
+
+            // Duração Padrão Total (soma dos data-duration) + 1 minuto de intro (Cântico/Intro)
+            // Intro: 1 min
+            // Seções: Soma dos data-duration nos articles
+            // Vamos somar tudo para achar a proporção
+            const introDuration = 1; 
+            let totalStandardMinutes = introDuration; 
+            
+            const articles = document.querySelectorAll('[data-duration]');
+            articles.forEach(article => {
+                totalStandardMinutes += parseInt(article.getAttribute('data-duration'));
+            });
+
+            // Fator de Compressão
+            // Se temos 60 min padrão e 57 min disponíveis, fator = 57/60 = 0.95
+            const compressionFactor = availableMinutes / totalStandardMinutes;
+
+            // Calcular horários
+            // Começamos o "relógio corrente" no horário de início
+            let currentTime = new Date(start);
+
+            // Primeiro, consumimos o tempo da Intro (que não tem card, mas consome tempo)
+            const compressedIntro = 1 * compressionFactor;
+            // Adicionar intro ao relógio corrente
+            currentTime = new Date(currentTime.getTime() + compressedIntro * 60000);
+
+            // Agora iterar sobre os cards
+            articles.forEach(article => {
+                const originalDuration = parseInt(article.getAttribute('data-duration'));
+                const compressedDurationMs = (originalDuration * compressionFactor) * 60000;
+                
+                // Hora de Início do bloco (formatado)
+                const blockStartStr = currentTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+                // Avançar o tempo
+                const endTime = new Date(currentTime.getTime() + compressedDurationMs);
+                const blockEndStr = endTime.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+
+                // Atualizar o DOM
+                const displayEl = article.querySelector('.time-display');
+                if (displayEl) {
+                    displayEl.textContent = `${blockStartStr} - ${blockEndStr}`;
+                }
+
+                // Atualizar currentTime para o próximo loop
+                currentTime = endTime;
+            });
+        }
+
+        // Rodar ao iniciar
+        recalculateTimes();
+
+    </script>
+</body>
+</html>
