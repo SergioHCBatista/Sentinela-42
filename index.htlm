@@ -1,0 +1,220 @@
+    <script>
+        // Ícones
+        lucide.createIcons();
+
+        // Relógio
+        function updateClock() {
+            const now = new Date();
+            const timeString = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            document.getElementById('clock').textContent = timeString;
+        }
+        setInterval(updateClock, 1000);
+        updateClock();
+
+        // Toggle Highlights
+        function toggleHighlights() {
+            document.body.classList.toggle('hide-highlights');
+        }
+
+        // Menu Mobile
+        function toggleMenu() {
+            const controls = document.getElementById('viewControls');
+            controls.classList.toggle('hidden');
+            controls.classList.toggle('flex');
+        }
+
+        // ========== SALVAMENTO AUTOMÁTICO DE NOTAS ==========
+        function saveNotes() {
+            const notesBoxes = document.querySelectorAll('.notes-box[contenteditable="true"]');
+            const notesData = {};
+            
+            notesBoxes.forEach((box, index) => {
+                notesData[`note_${index}`] = box.innerHTML;
+            });
+            
+            localStorage.setItem('watchtower_notes_estudo42', JSON.stringify(notesData));
+            
+            // Mostrar feedback visual
+            showSaveNotification('Notas salvas automaticamente!');
+        }
+
+        // Carregar notas salvas ao iniciar
+        function loadSavedNotes() {
+            const savedNotes = localStorage.getItem('watchtower_notes_estudo42');
+            if (savedNotes) {
+                const notesData = JSON.parse(savedNotes);
+                const notesBoxes = document.querySelectorAll('.notes-box[contenteditable="true"]');
+                
+                notesBoxes.forEach((box, index) => {
+                    if (notesData[`note_${index}`]) {
+                        box.innerHTML = notesData[`note_${index}`];
+                    }
+                });
+            }
+        }
+
+        // Auto-salvar a cada 10 segundos quando houver mudanças
+        let notesChanged = false;
+        document.addEventListener('DOMContentLoaded', function() {
+            loadSavedNotes();
+            
+            const notesBoxes = document.querySelectorAll('.notes-box[contenteditable="true"]');
+            notesBoxes.forEach(box => {
+                box.addEventListener('input', () => {
+                    notesChanged = true;
+                });
+            });
+            
+            setInterval(() => {
+                if (notesChanged) {
+                    saveNotes();
+                    notesChanged = false;
+                }
+            }, 10000);
+        });
+
+        // Notificação de salvamento
+        function showSaveNotification(message) {
+            const notification = document.createElement('div');
+            notification.textContent = message;
+            notification.style.cssText = 'position: fixed; top: 80px; right: 20px; background: #10b981; color: white; padding: 12px 24px; border-radius: 8px; box-shadow: 0 4px 6px rgba(0,0,0,0.2); z-index: 9999; animation: slideIn 0.3s ease;';
+            document.body.appendChild(notification);
+            
+            setTimeout(() => {
+                notification.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => notification.remove(), 300);
+            }, 2000);
+        }
+
+        // ========== EXPORTAR NOTAS ==========
+        function exportNotesAsPDF() {
+            window.print();
+        }
+
+        function exportNotesAsText() {
+            const notesBoxes = document.querySelectorAll('.notes-box[contenteditable="true"]');
+            let textContent = '=== NOTAS DO ESTUDO 42 - COMO ORAR A JEOVÁ DE CORAÇÃO? ===\n\n';
+            
+            notesBoxes.forEach((box, index) => {
+                const section = box.closest('article');
+                const question = section?.querySelector('.question-text')?.textContent || `Seção ${index + 1}`;
+                textContent += `${question}\n`;
+                textContent += box.innerText + '\n\n';
+                textContent += '-'.repeat(80) + '\n\n';
+            });
+            
+            const blob = new Blob([textContent], { type: 'text/plain' });
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement('a');
+            a.href = url;
+            a.download = 'notas_estudo42_watchtower.txt';
+            a.click();
+            URL.revokeObjectURL(url);
+            
+            showSaveNotification('Notas exportadas com sucesso!');
+        }
+
+        // ========== MODO APRESENTAÇÃO ==========
+        let presentationMode = false;
+        function togglePresentationMode() {
+            presentationMode = !presentationMode;
+            const header = document.getElementById('mainHeader');
+            const footer = document.querySelector('footer');
+            const backToTop = document.querySelector('button[onclick*="scrollTo"]');
+            
+            if (presentationMode) {
+                document.documentElement.requestFullscreen?.();
+                header.style.display = 'none';
+                footer.style.display = 'none';
+                if (backToTop) backToTop.style.display = 'none';
+                document.body.style.paddingTop = '0';
+                showSaveNotification('Modo Apresentação ativado! (ESC para sair)');
+            } else {
+                document.exitFullscreen?.();
+                header.style.display = 'block';
+                footer.style.display = 'block';
+                if (backToTop) backToTop.style.display = 'block';
+                document.body.style.paddingTop = '';
+            }
+        }
+
+        // Detectar saída do fullscreen
+        document.addEventListener('fullscreenchange', () => {
+            if (!document.fullscreenElement && presentationMode) {
+                togglePresentationMode();
+            }
+        });
+
+        // ========== TEMPORIZADOR COM ALERTAS ==========
+        let timerAlerts = [];
+        let alertsEnabled = true;
+
+        function checkTimeAlerts() {
+            if (!alertsEnabled) return;
+            
+            const now = new Date();
+            const currentTime = now.toLocaleTimeString('pt-BR', { hour: '2-digit', minute: '2-digit' });
+            
+            // Alertas importantes
+            if (currentTime === '18:00' && !timerAlerts.includes('18:00')) {
+                showTimeAlert('⏰ 18:00 - Você deve estar no parágrafo 9!', 'warning');
+                playAlertSound();
+                timerAlerts.push('18:00');
+            }
+            
+            if (currentTime === '18:35' && !timerAlerts.includes('18:35')) {
+                showTimeAlert('⏰ 18:35 - Faltam 5 minutos para o término!', 'danger');
+                playAlertSound();
+                timerAlerts.push('18:35');
+            }
+            
+            if (currentTime === '18:40' && !timerAlerts.includes('18:40')) {
+                showTimeAlert('🎯 18:40 - Hora de encerrar!', 'success');
+                playAlertSound();
+                timerAlerts.push('18:40');
+            }
+        }
+
+        setInterval(checkTimeAlerts, 30000); // Checar a cada 30 segundos
+
+        function showTimeAlert(message, type) {
+            const colors = {
+                warning: '#f59e0b',
+                danger: '#ef4444',
+                success: '#10b981'
+            };
+            
+            const alert = document.createElement('div');
+            alert.textContent = message;
+            alert.style.cssText = `position: fixed; top: 80px; left: 50%; transform: translateX(-50%); background: ${colors[type]}; color: white; padding: 16px 32px; border-radius: 12px; box-shadow: 0 8px 16px rgba(0,0,0,0.3); z-index: 9999; font-weight: bold; font-size: 1.1rem; animation: pulse 0.5s ease;`;
+            document.body.appendChild(alert);
+            
+            setTimeout(() => {
+                alert.style.animation = 'slideOut 0.3s ease';
+                setTimeout(() => alert.remove(), 300);
+            }, 5000);
+        }
+
+        function playAlertSound() {
+            // Criar um beep simples usando Web Audio API
+            const audioContext = new (window.AudioContext || window.webkitAudioContext)();
+            const oscillator = audioContext.createOscillator();
+            const gainNode = audioContext.createGain();
+            
+            oscillator.connect(gainNode);
+            gainNode.connect(audioContext.destination);
+            
+            oscillator.frequency.value = 800;
+            oscillator.type = 'sine';
+            
+            gainNode.gain.setValueAtTime(0.3, audioContext.currentTime);
+            gainNode.gain.exponentialRampToValueAtTime(0.01, audioContext.currentTime + 0.5);
+            
+            oscillator.start(audioContext.currentTime);
+            oscillator.stop(audioContext.currentTime + 0.5);
+        }
+
+        function toggleAlerts() {
+            alertsEnabled = !alertsEnabled;
+            showSaveNotification(alertsEnabled ? 'Alertas ativados!' : 'Alertas desativados!');
+        }
